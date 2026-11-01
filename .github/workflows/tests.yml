@@ -1,0 +1,35 @@
+name: tests
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        script:
+          - test_2_01_writing_to_log.sh
+          - test_2_02_simple_server_with_browser.sh
+          - test_2_03_project_compose.sh
+          - test_2_04_project_redis.sh
+          - test_2_06_project_postgres.sh
+          - test_2_07_project_bind_mount.sh
+          - test_2_08_project_nginx_basic.sh
+          - test_2_09_project_nginx.sh
+          - test_2_10_project_closed_ports.sh
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Run ${{ matrix.script }}
+        run: bash tests/${{ matrix.script }}
