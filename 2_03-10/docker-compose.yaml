@@ -10,8 +10,20 @@ services:
     environment:
       - REQUEST_ORIGIN=http://localhost:5001
       - REDIS_HOST=redis
+      - POSTGRES_HOST=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=postgres
     depends_on:
       - redis
+      - db
     restart: unless-stopped
   redis:
     image: redis:7
+  db:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./database:/var/lib/postgresql
