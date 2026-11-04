@@ -1,0 +1,9 @@
+FROM ubuntu:24.04
+WORKDIR /usr/src/app
+RUN apt-get update && apt-get install -y curl ca-certificates
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
+COPY . .
+ENV REACT_APP_BACKEND_URL=http://localhost:8000/api
+RUN npm install && npm run build && npm install -g serve
+EXPOSE 5001
+CMD ["serve", "-s", "-l", "5001", "build"]

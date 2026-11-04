@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: ebencodex/example-frontend
+    build: ../example-app/frontend
   backend:
     image: ebencodex/example-backend
     environment:

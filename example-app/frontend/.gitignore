@@ -23,4 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 
 # To not accidentally reveal answers. If you're student copying the application you may remove this.
-Dockerfile
